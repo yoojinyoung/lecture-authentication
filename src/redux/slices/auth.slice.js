@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import authAPI from "../../api/auth.api";
 
 const initialValue = {
   isLoggedIn: false,
@@ -12,11 +13,14 @@ const initialValue = {
 export const logIn = createAsyncThunk(
   "auth/login",
   async ({ id, pw }, thunkAPI) => {
-    if (true) {
+    const response = await authAPI.logIn({ id, pw });
+
+    if (response.status === 200) {
+      const { accessToken, avatar, nickname, userId } = response.data;
       return thunkAPI.fulfillWithValue({
-        id,
-        nickname: "helloWorld",
-        avatar: null,
+        id: userId,
+        nickname,
+        avatar,
       });
     } else {
       return thunkAPI.rejectWithValue();

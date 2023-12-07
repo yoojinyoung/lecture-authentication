@@ -27,6 +27,7 @@ function LoginPage() {
           placeholder="pw를 입력해 주세요"
           value={pw}
           onChange={(e) => setPw(e.currentTarget.value)}
+          type="password"
         />
         <button type="submit">로그인하기</button>
       </form>
