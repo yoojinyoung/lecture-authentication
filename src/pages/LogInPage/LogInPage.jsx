@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import Page from "../../components/Page";
 import { logIn } from "../../redux/slices/auth.slice";
 
 function LoginPage() {
@@ -15,8 +16,7 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>로그인페이지</h1>
+    <Page title="로그인">
       <form onSubmit={handleSubmit}>
         <input
           placeholder="id를 입력해 주세요"
@@ -31,7 +31,7 @@ function LoginPage() {
         />
         <button type="submit">로그인하기</button>
       </form>
-    </div>
+    </Page>
   );
 }
 

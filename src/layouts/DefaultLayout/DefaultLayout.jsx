@@ -6,9 +6,7 @@ function DefaultLayout() {
   return (
     <div>
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Page from "../../components/Page";
 
 function SignUpPage() {
   const [id, setId] = useState("");
@@ -13,8 +14,7 @@ function SignUpPage() {
   };
 
   return (
-    <div>
-      <h1>회원가입 페이지</h1>
+    <Page title="회원가입">
       <form onSubmit={handleSubmit}>
         <input
           placeholder="id를 입력해 주세요"
@@ -33,7 +33,7 @@ function SignUpPage() {
         />
         <button type="submit">회원가입하기</button>
       </form>
-    </div>
+    </Page>
   );
 }
 
