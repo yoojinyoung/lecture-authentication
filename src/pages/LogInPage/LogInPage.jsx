@@ -11,7 +11,7 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(logIn());
+    dispatch(logIn({ id, pw }));
   };
 
   return (

@@ -2,11 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logOut } from "../../redux/slices/auth.slice";
+import { authActions } from "../../redux/slices/auth.slice";
 
 function Header() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
+  const { logOut } = authActions;
 
   const handleClickLogOut = () => {
     dispatch(logOut());

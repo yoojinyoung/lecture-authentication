@@ -3,7 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import PrivateRoutesLayout from "../layouts/PrivateRoutesLayout/PrivateRoutesLayout";
 import PublicRoutesLayout from "../layouts/PublicRoutesLayout/PublicRoutesLayout";
 import HomePage from "./HomePage";
-import LoginPage from "./LoginPage";
+import LogInPage from "./LogInPage";
 import SignUpPage from "./SignUpPage";
 
 function Pages() {
@@ -11,7 +11,7 @@ function Pages() {
     <Routes>
       <Route element={<DefaultLayout />}>
         <Route element={<PublicRoutesLayout />}>
-          <Route path="/log-in" element={<LoginPage />} exact />
+          <Route path="/log-in" element={<LogInPage />} exact />
           <Route path="/sign-up" element={<SignUpPage />} exact />
         </Route>
         <Route element={<PrivateRoutesLayout />}>
