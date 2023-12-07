@@ -7,8 +7,8 @@ function Header() {
     <Wrapper>
       <Logo to="/">인증 연습하기</Logo>
       <Controls>
-        <Button to={"/login"}>로그인하기</Button>
-        <Button to={"/signup"}>회원가입하기</Button>
+        <Button to={"/log-in"}>로그인하기</Button>
+        <Button to={"/sign-up"}>회원가입하기</Button>
       </Controls>
     </Wrapper>
   );

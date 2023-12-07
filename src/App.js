@@ -1,11 +1,15 @@
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Pages from "./pages";
+import store from "./redux/store";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Pages />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Pages />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

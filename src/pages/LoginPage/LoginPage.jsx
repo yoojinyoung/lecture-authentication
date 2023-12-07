@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/slices/auth.slice";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("id", id);
-    console.log("pw", pw);
+    dispatch(logIn());
   };
 
   return (

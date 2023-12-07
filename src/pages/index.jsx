@@ -8,8 +8,8 @@ function Pages() {
   return (
     <Routes>
       <Route element={<DefaultLayout />}>
-        <Route path="/login" element={<LoginPage />} exact />
-        <Route path="/signup" element={<SignUpPage />} exact />
+        <Route path="/log-in" element={<LoginPage />} exact />
+        <Route path="/sign-up" element={<SignUpPage />} exact />
         <Route path="/" element={<HomePage />} exact />
       </Route>
     </Routes>
