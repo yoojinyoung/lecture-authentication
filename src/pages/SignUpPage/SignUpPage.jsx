@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Form from "../../components/Form/Form";
 import Page from "../../components/Page";
+import { signUp } from "../../redux/slices/auth.slice";
 
 function SignUpPage() {
+  const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [nickname, setNickname] = useState("");
   const [pw, setPw] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!id || !pw || !nickname) return alert("모든 값을 제대로 입력해 주세요");
 
-    console.log("id", id);
-    console.log("pw", pw);
+    dispatch(signUp({ id, pw, nickname }));
   };
 
   return (

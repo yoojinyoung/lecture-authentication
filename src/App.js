@@ -1,15 +1,20 @@
-import { Provider } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Pages from "./pages";
-import store from "./redux/store";
+import { logIn } from "./redux/slices/auth.slice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(logIn({}));
+  }, [dispatch]);
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Pages />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Pages />
+    </BrowserRouter>
   );
 }
 

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authAPI from "../../api/auth.api";
 
+const accessToken = localStorage.getItem("accessToken");
 const initialValue = {
-  isLoggedIn: false,
+  isLoggedIn: !!accessToken,
   user: {
     id: undefined,
     nickname: undefined,
@@ -11,17 +12,49 @@ const initialValue = {
 };
 
 export const logIn = createAsyncThunk(
-  "auth/login",
+  "auth/logIn",
   async ({ id, pw }, thunkAPI) => {
-    const response = await authAPI.logIn({ id, pw });
+    if (id && pw) {
+      const response = await authAPI.logIn({ id, pw });
 
-    if (response.status === 200) {
-      const { accessToken, avatar, nickname, userId } = response.data;
+      if (response.status === 200) {
+        const { accessToken, avatar, nickname, userId } = response.data;
+        authAPI.setToken(accessToken);
+        localStorage.setItem("accessToken", accessToken);
+
+        return thunkAPI.fulfillWithValue({
+          id: userId,
+          nickname,
+          avatar,
+        });
+      } else {
+        return thunkAPI.rejectWithValue();
+      }
+    } else if (!!accessToken) {
+      authAPI.setToken(accessToken);
+      const response = await authAPI.getProfile();
+      const { avatar, nickname, userId } = response.data;
+
       return thunkAPI.fulfillWithValue({
         id: userId,
         nickname,
         avatar,
       });
+    } else {
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const signUp = createAsyncThunk(
+  "auth/signUp",
+  async ({ id, pw, nickname }, thunkAPI) => {
+    const response = await authAPI.signUp({ id, pw, nickname });
+
+    if (response.status === 201) {
+      await thunkAPI.dispatch(logIn({ id, pw }));
+
+      return thunkAPI.fulfillWithValue();
     } else {
       return thunkAPI.rejectWithValue();
     }
@@ -39,6 +72,9 @@ export const authSlice = createSlice({
         nickname: undefined,
         avatar: undefined,
       };
+
+      authAPI.setToken();
+      localStorage.removeItem("accessToken");
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +92,5 @@ export const authSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const authActions = authSlice.actions;
 export const authReducer = authSlice.reducer;
